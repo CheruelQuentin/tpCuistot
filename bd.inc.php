@@ -8,7 +8,7 @@ function connexionPDO() {
         $conn = new PDO("mysql:host=$serveur;dbname=$bd", $login, $mdp, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\'')); 
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
-        return var_dump($conn);
+        return $conn;
     } catch (PDOException $e) {
         return "Erreur de connexion PDO ";
         print $e;
@@ -16,10 +16,29 @@ function connexionPDO() {
     }
 }
 
+function recettes() {
+        $resultat = array();
+        try {
+            $cnx = connexionPDO();
+            $req = $cnx->prepare("select * from recettes ");
+            $req->execute();
+            $ligne = $req->fetch(PDO::FETCH_ASSOC);
+            while ($ligne) {
+                $resultat[] = $ligne;
+                $ligne = $req->fetch(PDO::FETCH_ASSOC);
+            }
+        } catch (PDOException $e) {
+            print "Erreur !: " . $e->getMessage();
+            die();
+        }
+        return $resultat;
+}
 
 ini_set('soap.wsdl_cache_enabled', 0);
 $serversoap=new SoapServer("http://localhost/SOAP/TPCUISTOT/server.wsdl");
 $serversoap->addFunction("connexionPDO");
+$serversoap->addFunction("recettes");
+
 $serversoap->handle();
 
 ?>

@@ -7,12 +7,21 @@ xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"  xmlns:soapenc="http://schema
       <part name="connexionPDOReturn"/>
     </message>
 
+    <message name="recettes"/>
+       <message name="recettesResponse">
+      <part name="recettesReturn"/>
+    </message>
+
     
   <portType name="essai_instancePortType">
     <operation name="connexionPDO">
       <input message="typens:connexionPDO"/>
       <output message="typens:connexionPDOResponse"/>
-      </operation>
+    </operation>
+    <operation name="recettes">
+      <input message="typens:recettes"/>
+      <output message="typens:recettesResponse"/>
+    </operation>
   </portType>  
 
   <binding name="essai_instanceBinding" type="typens:essai_instancePortType">
@@ -27,9 +36,17 @@ xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"  xmlns:soapenc="http://schema
         <soap:body namespace="urn:exemple" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
       </output>
     </operation>
- 
-    
 
+    <operation name="recettes">
+      <soap:operation soapAction="urn:essai_instanceAction"/>
+      <input>
+        <soap:body namespace="urn:exemple" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </input>
+      <output>
+        <soap:body namespace="urn:exemple" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </output>
+    </operation>
+ 
   </binding>
   <service name="exempleService">
     <port name="essai_instancePort" binding="typens:essai_instanceBinding">
