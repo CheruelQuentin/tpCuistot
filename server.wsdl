@@ -2,6 +2,16 @@
 <definitions name="exemple" targetNamespace="urn:exemple" xmlns:typens="urn:exemple" xmlns:xsd="http://www.w3.org/2001/XMLSchema"  
 xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"  xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
   xmlns="http://schemas.xmlsoap.org/wsdl/"  xmlns:typens0="http://localhost/SOAP/TPCUISTOT/bd.inc.php">
+    
+    <types>
+      <xsd:complexType name="addRecette">
+        <xsd:sequence>
+          <xsd:element name="nomRecette" type="xs:string" minOccurs="0" maxOccurs="50"/>
+          <xsd:element name="descriptionRecette" type="xs:string" minOccurs="0" maxOccurs="50"/>
+        </xsd:sequence>
+      </xsd:complexType>  
+    </types>
+    
     <message name="connexionPDO"/>
        <message name="connexionPDOResponse">
       <part name="connexionPDOReturn"/>
@@ -12,9 +22,11 @@ xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"  xmlns:soapenc="http://schema
       <part name="recettesReturn"/>
     </message>
 
-    <message name="addRecette"/>
-       <message name="addRecetteResponse">
-      <part name="addRecetteReturn"/>
+    <message name="addRecetteWithComplexeType"/>
+      <part name="addRecette" type="tns.addRecette"/>
+    </message>
+    <message name="addRecetteWithComplexeTypeResponse"/>
+      <part name="addRecetteWithComplexeTypeResponse" type="xsd:boolean"/>
     </message>
 
     <message name="deleteRecette"/>
@@ -35,9 +47,9 @@ xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"  xmlns:soapenc="http://schema
       <output message="typens:recettesResponse"/>
     </operation>
     
-    <operation name="addRecette" parameterOrder="nomRecette descriptionRecette">
-      <input message="tns:addRecette"/>
-      <output message="tns:addRecetteResponse"/>
+    <operation name="addRecette">
+      <input message="tns:addRecetteWithComplexeType"/>
+      <output message="tns:addRecetteWithComplexeTypeResponse"/>
     </operation>
     
     <operation name="deleteRecette">
@@ -48,8 +60,8 @@ xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"  xmlns:soapenc="http://schema
   </portType>  
 
   <binding name="essai_instanceBinding" type="typens:essai_instancePortType">
-
       <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+  
     <operation name="connexionPDO">
       <soap:operation soapAction="urn:essai_instanceAction"/>
       <input>
@@ -69,7 +81,7 @@ xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"  xmlns:soapenc="http://schema
         <soap:body namespace="urn:exemple" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
       </output>
     </operation>
- 
+    
     <operation name="addRecette">
       <soap:operation soapAction="urn:essai_instanceAction"/>
       <input>
@@ -79,7 +91,7 @@ xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"  xmlns:soapenc="http://schema
         <soap:body namespace="urn:exemple" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
       </output>
     </operation>
-    
+  
     <operation name="deleteRecette">
       <soap:operation soapAction="urn:essai_instanceAction"/>
       <input>
@@ -89,11 +101,13 @@ xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"  xmlns:soapenc="http://schema
         <soap:body namespace="urn:exemple" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
       </output>
     </operation>
-
+  
   </binding>
+  
   <service name="exempleService">
     <port name="essai_instancePort" binding="typens:essai_instanceBinding">
       <soap:address location="http://localhost/SOAP/TPCUISTOT/bd.inc.php"/>
     </port>
   </service>
+
 </definitions>
