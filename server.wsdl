@@ -1,17 +1,17 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <definitions name="exemple" targetNamespace="urn:exemple" xmlns:typens="urn:exemple" xmlns:xsd="http://www.w3.org/2001/XMLSchema"  
 xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"  xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
-  xmlns="http://schemas.xmlsoap.org/wsdl/"  xmlns:typens0="http://localhost/SOAP/TPCUISTOT/bd.inc.php">
+xmlns="http://schemas.xmlsoap.org/wsdl/"  xmlns:typens0="http://localhost/SOAP/TPCUISTOT/bd.inc.php">
     
     <types>
-    <xsd:schema targetNamespace="http://localhost/SOAP/TPCUISTOT/"
+    <xsd:schema targetNamespace="http://localhost/SOAP/TPCUISTOT/">
       <xsd:complexType name="addRecette">
         <xsd:sequence>
           <xsd:element name="nomRecette" type="xs:string" minOccurs="0" maxOccurs="50"/>
           <xsd:element name="descriptionRecette" type="xs:string" minOccurs="0" maxOccurs="50"/>
         </xsd:sequence>
       </xsd:complexType>
-    </xsd:schemas>  
+    </xsd:schema>  
     </types>
     
     <message name="connexionPDO"/>
@@ -24,10 +24,11 @@ xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"  xmlns:soapenc="http://schema
       <part name="recettesReturn"/>
     </message>
 
+
     <message name="addRecetteWithComplexeType"/>
-      <part name="addRecette" type="tns.addRecette"/>
+      <part name="addRecette" type="tns:addRecette"/>
     </message>
-    
+
     <message name="addRecetteWithComplexeTypeResponse"/>
       <part name="addRecetteWithComplexeTypeResponse" type="xsd:boolean"/>
     </message>
@@ -54,7 +55,7 @@ xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"  xmlns:soapenc="http://schema
       <input message="tns:addRecetteWithComplexeType"/>
       <output message="tns:addRecetteWithComplexeTypeResponse"/>
     </operation>
-    
+     
     <operation name="deleteRecette">
       <input message="typens:deleteRecette"/>
       <output message="typens:deleteRecetteResponse"/>
@@ -84,17 +85,17 @@ xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"  xmlns:soapenc="http://schema
         <soap:body namespace="urn:exemple" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
       </output>
     </operation>
-    
-    <operation name="addRecette">
-      <soap:operation soapAction="urn:essai_instanceAction"/>
-      <input>
-        <soap:body namespace="urn:exemple" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
-      </input>
-      <output>
-        <soap:body namespace="urn:exemple" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
-      </output>
-    </operation>
-  
+    <!--
+   <operation name="addRecette">
+     <soap:operation soapAction="urn:essai_instanceAction"/>
+     <input>
+       <soap:body namespace="urn:exemple" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+     </input>
+     <output>
+       <soap:body namespace="urn:exemple" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+     </output>
+   </operation>
+  -->
     <operation name="deleteRecette">
       <soap:operation soapAction="urn:essai_instanceAction"/>
       <input>
