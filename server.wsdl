@@ -35,9 +35,9 @@ xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"  xmlns:soapenc="http://schema
       <output message="typens:recettesResponse"/>
     </operation>
     
-    <operation name="addRecette">
-      <input message="typens:addRecette"/>
-      <output message="typens:addRecetteResponse"/>
+    <operation name="addRecette" parameterOrder="nomRecette descriptionRecette">
+      <input message="tns:addRecette"/>
+      <output message="tns:addRecetteResponse"/>
     </operation>
     
     <operation name="deleteRecette">
