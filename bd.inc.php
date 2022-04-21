@@ -70,6 +70,8 @@ ini_set('soap.wsdl_cache_enabled', 0);
 $serversoap=new SoapServer("http://localhost/SOAP/TPCUISTOT/server.wsdl");
 $serversoap->addFunction("connexionPDO");
 $serversoap->addFunction("recettes");
+$serversoap->addFunction("addRecette");
+$serversoap->addFunction("deleteRecette");
 
 $serversoap->handle();
 

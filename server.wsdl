@@ -12,16 +12,39 @@ xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"  xmlns:soapenc="http://schema
       <part name="recettesReturn"/>
     </message>
 
+    <message name="addRecette"/>
+       <message name="addRecetteResponse">
+      <part name="addRecetteReturn"/>
+    </message>
+
+    <message name="deleteRecette"/>
+       <message name="deleteRecetteResponse">
+      <part name="deleteRecetteReturn"/>
+    </message>
+
     
   <portType name="essai_instancePortType">
+    
     <operation name="connexionPDO">
       <input message="typens:connexionPDO"/>
       <output message="typens:connexionPDOResponse"/>
     </operation>
+
     <operation name="recettes">
       <input message="typens:recettes"/>
       <output message="typens:recettesResponse"/>
     </operation>
+    
+    <operation name="addRecette">
+      <input message="typens:addRecette"/>
+      <output message="typens:addRecetteResponse"/>
+    </operation>
+    
+    <operation name="deleteRecette">
+      <input message="typens:deleteRecette"/>
+      <output message="typens:deleteRecetteResponse"/>
+    </operation>
+
   </portType>  
 
   <binding name="essai_instanceBinding" type="typens:essai_instancePortType">
@@ -47,6 +70,26 @@ xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"  xmlns:soapenc="http://schema
       </output>
     </operation>
  
+    <operation name="addRecette">
+      <soap:operation soapAction="urn:essai_instanceAction"/>
+      <input>
+        <soap:body namespace="urn:exemple" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </input>
+      <output>
+        <soap:body namespace="urn:exemple" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </output>
+    </operation>
+    
+    <operation name="deleteRecette">
+      <soap:operation soapAction="urn:essai_instanceAction"/>
+      <input>
+        <soap:body namespace="urn:exemple" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </input>
+      <output>
+        <soap:body namespace="urn:exemple" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </output>
+    </operation>
+
   </binding>
   <service name="exempleService">
     <port name="essai_instancePort" binding="typens:essai_instanceBinding">
