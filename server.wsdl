@@ -4,12 +4,14 @@ xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"  xmlns:soapenc="http://schema
   xmlns="http://schemas.xmlsoap.org/wsdl/"  xmlns:typens0="http://localhost/SOAP/TPCUISTOT/bd.inc.php">
     
     <types>
+    <xsd:schema targetNamespace="http://localhost/SOAP/TPCUISTOT/"
       <xsd:complexType name="addRecette">
         <xsd:sequence>
           <xsd:element name="nomRecette" type="xs:string" minOccurs="0" maxOccurs="50"/>
           <xsd:element name="descriptionRecette" type="xs:string" minOccurs="0" maxOccurs="50"/>
         </xsd:sequence>
-      </xsd:complexType>  
+      </xsd:complexType>
+    </xsd:schemas>  
     </types>
     
     <message name="connexionPDO"/>
@@ -25,13 +27,14 @@ xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"  xmlns:soapenc="http://schema
     <message name="addRecetteWithComplexeType"/>
       <part name="addRecette" type="tns.addRecette"/>
     </message>
+    
     <message name="addRecetteWithComplexeTypeResponse"/>
       <part name="addRecetteWithComplexeTypeResponse" type="xsd:boolean"/>
     </message>
 
     <message name="deleteRecette"/>
-       <message name="deleteRecetteResponse">
-      <part name="deleteRecetteReturn"/>
+      <message name="deleteRecetteResponse">
+        <part name="deleteRecetteReturn"/>
     </message>
 
     
